@@ -2,7 +2,7 @@
 
 Trusted external plugins for Termia experimental API 2. Diagnostics is the first
 plugin and retains version `0.1.0.dev0`. This local source tree is not a published
-release. No remote or public download location has been configured.
+release. No packaged release assets have been published.
 
 Plugins run in Termia's process with its permissions, without sandboxing. Install
 only trusted code. Activation changes apply on Save; installing or updating code
@@ -54,18 +54,20 @@ application and plugin production module is present. Report separate host/plugin
 line and branch totals as well as the combined result. No coverage exclusions or
 minimum percentages apply. Reports remain ignored in Termia's `htmlcov/`.
 Coverage does not measure native GTK/VTE code or guarantee child data after an
-abrupt process termination. Standalone Termia CI measures only the host; combined
-CI must be configured with a pinned plugin revision before remote final review.
+abrupt process termination. Termia's combined CI configuration pins a compatible
+plugin commit and requires both suites and complete production-module coverage
+inventory. That repository and commit must be published before remote CI can run.
+Local standalone Termia commands measure only the host.
 
 ## Packaging
 
 The packager accepts a tar snapshot rooted at this directory, containing the
-plugin and `LICENSE`. After repository initialization and commits are separately
-authorized, create that snapshot with `git archive` from an approved revision.
-Until then, no committed standalone revision exists. For a prepared snapshot:
+plugin and `LICENSE`. From this checkout, package the approved committed source:
 
 ```bash
-python3 package_plugin.py diagnostics --snapshot /path/to/plugins-source.tar --output dist
+mkdir -p dist
+git archive --format=tar --output=dist/source.tar HEAD
+python3 package_plugin.py diagnostics --snapshot dist/source.tar --output dist
 ```
 
 The output is `termia-plugin-diagnostics-0.1.0.dev0.tar.gz` and its `.sha256`
