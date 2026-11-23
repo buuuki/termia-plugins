@@ -1,0 +1,14 @@
+[run]
+branch = true
+source =
+    ${TERMIA_SOURCE_DIR?}/src/termia
+    ${TERMIA_PLUGINS_SOURCE?}/diagnostics/src/termia_diagnostics
+patch = subprocess
+data_file = ${TERMIA_SOURCE_DIR?}/.coverage
+
+[report]
+precision = 2
+show_missing = true
+
+[html]
+directory = ${TERMIA_SOURCE_DIR?}/htmlcov

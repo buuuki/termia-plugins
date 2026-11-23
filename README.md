@@ -1,0 +1,74 @@
+# Termia plugins
+
+Trusted external plugins for Termia experimental API 2. Diagnostics is the first
+plugin and retains version `0.1.0.dev0`. This local source tree is not a published
+release. No remote or public download location has been configured.
+
+Plugins run in Termia's process with its permissions, without sandboxing. Install
+only trusted code. Activation changes apply on Save; installing or updating code
+requires restarting Termia. Existing Diagnostics users must install it manually.
+
+## Layout
+
+- `diagnostics/`: manifest, implementation and EN/ES/CA translations.
+- `package_plugin.py`: reproducible per-plugin packaging from Git tar snapshots.
+- `termia_plugins_tests/`: plugin unit, packaging and host integration tests.
+- `LICENSE`: GPL-3.0-or-later; copied into each archive.
+
+## Local validation
+
+Keep this directory beside the compatible Termia checkout as `termia-plugins`.
+From the Termia checkout, use its existing GTK test runner and dependencies:
+
+```bash
+python3 scripts/run_sandbox_tests.py
+python3 scripts/run_sandbox_tests.py discover -s ../termia-plugins/termia_plugins_tests -t ../termia-plugins
+python3 tools/addon-lab/run.py
+```
+
+The first command tests the host independently; the second tests the external
+plugin and its integration. A missing external checkout is an error, not a skip.
+The laboratory uses an isolated profile and honors `TERMIA_PLUGINS_DIR`; its
+`--without-addon` mode runs without loading external plugins.
+
+For a fresh combined line/branch measurement, run from the Termia checkout with
+its existing Coverage installation and access to system GTK:
+
+```bash
+export TERMIA_SOURCE_DIR="$PWD"
+export TERMIA_PLUGINS_SOURCE="$(realpath ../termia-plugins)"
+export COVERAGE_RCFILE="$TERMIA_PLUGINS_SOURCE/.coveragerc"
+test -f "$TERMIA_PLUGINS_SOURCE/diagnostics/plugin.json" &&
+coverage erase &&
+coverage run scripts/run_sandbox_tests.py &&
+coverage run scripts/run_sandbox_tests.py discover -s "$TERMIA_PLUGINS_SOURCE/termia_plugins_tests" -t "$TERMIA_PLUGINS_SOURCE" &&
+coverage combine &&
+coverage report &&
+coverage html &&
+coverage json -o htmlcov/coverage.json
+unset COVERAGE_RCFILE TERMIA_SOURCE_DIR TERMIA_PLUGINS_SOURCE
+```
+
+Both runs produce subprocess data; combine only after both succeed. Verify every
+application and plugin production module is present. Report separate host/plugin
+line and branch totals as well as the combined result. No coverage exclusions or
+minimum percentages apply. Reports remain ignored in Termia's `htmlcov/`.
+Coverage does not measure native GTK/VTE code or guarantee child data after an
+abrupt process termination. Standalone Termia CI measures only the host; combined
+CI must be configured with a pinned plugin revision before remote final review.
+
+## Packaging
+
+The packager accepts a tar snapshot rooted at this directory, containing the
+plugin and `LICENSE`. After repository initialization and commits are separately
+authorized, create that snapshot with `git archive` from an approved revision.
+Until then, no committed standalone revision exists. For a prepared snapshot:
+
+```bash
+python3 package_plugin.py diagnostics --snapshot /path/to/plugins-source.tar --output dist
+```
+
+The output is `termia-plugin-diagnostics-0.1.0.dev0.tar.gz` and its `.sha256`
+file. Existing outputs are not overwritten. Verify reproducibility and checksums
+before distribution. Checksums detect corruption, not publisher authenticity.
+Installation instructions are maintained in Termia's README in EN/ES/CA.
