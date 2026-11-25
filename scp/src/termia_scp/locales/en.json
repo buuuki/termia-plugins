@@ -1,0 +1,7 @@
+{
+  "cancel": "Cancel",
+  "send_files_to_server": "Send files to server",
+  "send_files_to_server_destination_confirm": "Upload",
+  "send_files_to_server_destination_label": "Remote directory",
+  "send_files_to_server_running": "Uploading to {name} in {destination}"
+}

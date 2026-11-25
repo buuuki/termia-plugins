@@ -1,0 +1,7 @@
+{
+  "cancel": "Cancel·lar",
+  "send_files_to_server": "Enviar fitxers al servidor",
+  "send_files_to_server_destination_confirm": "Puja",
+  "send_files_to_server_destination_label": "Directori remot",
+  "send_files_to_server_running": "Pujant a {name} a {destination}"
+}

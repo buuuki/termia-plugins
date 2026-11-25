@@ -1,0 +1,7 @@
+{
+  "cancel": "Cancelar",
+  "send_files_to_server": "Enviar ficheros al servidor",
+  "send_files_to_server_destination_confirm": "Subir",
+  "send_files_to_server_destination_label": "Directorio remoto",
+  "send_files_to_server_running": "Subiendo a {name} en {destination}"
+}
