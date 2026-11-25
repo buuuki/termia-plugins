@@ -1,0 +1,16 @@
+{
+  "average_duration": "Duración media",
+  "close": "Cerrar",
+  "connections": "Conexiones",
+  "current_run": "Ejecución actual",
+  "duration": "Duración",
+  "global": "Global",
+  "longest_duration": "Duración más larga",
+  "no_statistics": "Sin estadísticas todavía",
+  "server_connections": "Conexiones globales a este servidor",
+  "session_statistics": "Estadísticas de la sesión",
+  "sessions": "Sesiones",
+  "shortest_duration": "Duración más corta",
+  "statistics_title": "Estadísticas",
+  "top_servers": "Servidores más usados"
+}

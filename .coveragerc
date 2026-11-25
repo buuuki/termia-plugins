@@ -1,10 +1,17 @@
 [run]
 branch = true
+source_pkgs = termia_plugin_statistics
 source =
     ${TERMIA_SOURCE_DIR?}/src/termia
     ${TERMIA_PLUGINS_SOURCE?}/diagnostics/src/termia_diagnostics
+    ${TERMIA_PLUGINS_SOURCE?}/statistics/src/termia_statistics
 patch = subprocess
 data_file = ${TERMIA_SOURCE_DIR?}/.coverage
+
+[paths]
+statistics =
+    ${TERMIA_PLUGINS_SOURCE?}/statistics/src/termia_statistics
+    */plugins/statistics/src/termia_statistics
 
 [report]
 precision = 2

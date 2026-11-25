@@ -1,0 +1,19 @@
+{
+  "id": "statistics",
+  "name": {
+    "en": "Statistics",
+    "es": "Estadísticas",
+    "ca": "Estadístiques"
+  },
+  "version": "0.1.0.dev0",
+  "api_version": 2,
+  "module": "termia_statistics",
+  "icon": "utilities-system-monitor-symbolic",
+  "capabilities": [
+    "session_events",
+    "statistics_data",
+    "attach_window",
+    "apply_style"
+  ],
+  "default_enabled": false
+}

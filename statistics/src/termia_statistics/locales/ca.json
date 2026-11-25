@@ -1,0 +1,16 @@
+{
+  "average_duration": "Durada mitjana",
+  "close": "Tancar",
+  "connections": "Connexions",
+  "current_run": "Execució actual",
+  "duration": "Durada",
+  "global": "Global",
+  "longest_duration": "Durada més llarga",
+  "no_statistics": "Encara no hi ha estadístiques",
+  "server_connections": "Connexions globals a aquest servidor",
+  "session_statistics": "Estadístiques de la sessió",
+  "sessions": "Sessions",
+  "shortest_duration": "Durada més curta",
+  "statistics_title": "Estadístiques",
+  "top_servers": "Servidors més usats"
+}
