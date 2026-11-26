@@ -1,0 +1,16 @@
+{
+  "id": "sftp",
+  "name": {
+    "en": "SFTP browser",
+    "es": "Explorador SFTP",
+    "ca": "Navegador SFTP"
+  },
+  "version": "0.1.0.dev0",
+  "api_version": 2,
+  "module": "termia_sftp",
+  "icon": "folder-remote-symbolic",
+  "capabilities": [
+    "sftp_explorer"
+  ],
+  "default_enabled": true
+}

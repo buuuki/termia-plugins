@@ -1,6 +1,6 @@
 # Termia plugins
 
-Trusted external plugins for Termia experimental API 2. Diagnostics, Statistics and SCP
+Trusted external plugins for Termia experimental API 2. Diagnostics, Statistics, SCP and SFTP
 are distributed separately and currently declare version `0.1.0.dev0`. This local source tree is not a published
 release. No packaged release assets have been published.
 
@@ -13,6 +13,7 @@ requires restarting Termia. Existing Diagnostics users must install it manually.
 - `diagnostics/`: manifest, implementation and EN/ES/CA translations.
 - `statistics/`: connection counts, session durations, dashboards and EN/ES/CA translations.
 - `scp/`: contextual file selection, destination and progress UI for SCP uploads.
+- `sftp/`: contextual GTK explorer backed by Termia’s SFTP operations.
 - `package_plugin.py`: reproducible per-plugin packaging from Git tar snapshots.
 - `termia_plugins_tests/`: plugin unit, packaging and host integration tests.
 - `LICENSE`: GPL-3.0-or-later; copied into each archive.
@@ -43,6 +44,7 @@ export COVERAGE_RCFILE="$TERMIA_PLUGINS_SOURCE/.coveragerc"
 test -f "$TERMIA_PLUGINS_SOURCE/diagnostics/plugin.json" &&
 test -f "$TERMIA_PLUGINS_SOURCE/statistics/plugin.json" &&
 test -f "$TERMIA_PLUGINS_SOURCE/scp/plugin.json" &&
+test -f "$TERMIA_PLUGINS_SOURCE/sftp/plugin.json" &&
 coverage erase &&
 coverage run scripts/run_sandbox_tests.py &&
 coverage run scripts/run_sandbox_tests.py discover -s "$TERMIA_PLUGINS_SOURCE/termia_plugins_tests" -t "$TERMIA_PLUGINS_SOURCE" &&
@@ -54,7 +56,7 @@ unset COVERAGE_RCFILE TERMIA_SOURCE_DIR TERMIA_PLUGINS_SOURCE
 ```
 
 Both runs produce subprocess data; combine only after both succeed. Verify every
-application and plugin production module is present. Report separate Termia, Diagnostics, Statistics and SCP
+application and plugin production module is present. Report separate Termia, Diagnostics, Statistics, SCP and SFTP
 line and branch totals as well as the combined result. No coverage exclusions or
 minimum percentages apply. Reports remain ignored in Termia's `htmlcov/`.
 Coverage maps the installed Statistics package exercised by the restart test back
@@ -74,11 +76,12 @@ plugin and `LICENSE`. From this checkout, package the approved committed source:
 mkdir -p dist
 git archive --format=tar --output=dist/source.tar HEAD
 python3 package_plugin.py diagnostics --snapshot dist/source.tar --output dist
+python3 package_plugin.py sftp --snapshot dist/source.tar --output dist
 python3 package_plugin.py scp --snapshot dist/source.tar --output dist
 python3 package_plugin.py statistics --snapshot dist/source.tar --output dist
 ```
 
 These commands produce `termia-plugin-diagnostics-0.1.0.dev0.tar.gz` and `termia-plugin-scp-0.1.0.dev0.tar.gz` as well as
-`termia-plugin-statistics-0.1.0.dev0.tar.gz`, each with its own `.sha256` file. Existing outputs are not overwritten. Verify reproducibility and checksums
+`termia-plugin-statistics-0.1.0.dev0.tar.gz`, and `termia-plugin-sftp-0.1.0.dev0.tar.gz`, each with its own `.sha256` file. Existing outputs are not overwritten. Verify reproducibility and checksums
 before distribution. Checksums detect corruption, not publisher authenticity.
 Installation instructions are maintained in Termia's README in EN/ES/CA.

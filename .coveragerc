@@ -1,11 +1,12 @@
 [run]
 branch = true
-source_pkgs = termia_plugin_statistics, termia_plugin_scp
+source_pkgs = termia_plugin_statistics, termia_plugin_scp, termia_plugin_sftp
 source =
     ${TERMIA_SOURCE_DIR?}/src/termia
     ${TERMIA_PLUGINS_SOURCE?}/diagnostics/src/termia_diagnostics
     ${TERMIA_PLUGINS_SOURCE?}/statistics/src/termia_statistics
     ${TERMIA_PLUGINS_SOURCE?}/scp/src/termia_scp
+    ${TERMIA_PLUGINS_SOURCE?}/sftp/src/termia_sftp
 patch = subprocess
 data_file = ${TERMIA_SOURCE_DIR?}/.coverage
 
@@ -17,6 +18,10 @@ statistics =
 scp =
     ${TERMIA_PLUGINS_SOURCE?}/scp/src/termia_scp
     */plugins/scp/src/termia_scp
+
+sftp =
+    ${TERMIA_PLUGINS_SOURCE?}/sftp/src/termia_sftp
+    */plugins/sftp/src/termia_sftp
 
 [report]
 precision = 2
